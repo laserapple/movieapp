@@ -5,6 +5,7 @@ const MovieList = (props) => {
 
   return (
     <>
+ 
       {props.movies.map((movie, index) => (
         <div
           key={index}
@@ -20,6 +21,7 @@ const MovieList = (props) => {
           </div>
         </div>
       ))}
+    
     </>
   );
 };

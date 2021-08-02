@@ -30,8 +30,9 @@ function App() {
     const movieFavs = JSON.parse(
       localStorage.getItem("react-movie-app-favourites")
     );
-
-    setFavourites(movieFavs);
+    if (localStorage.getItem("react-movie-app-favourites") !== null) {
+      setFavourites(movieFavs);
+    }
   }, []);
 
   const saveToLocalStorage = (items) => {
@@ -40,13 +41,15 @@ function App() {
 
   const addFavouriteMovie = (movie) => {
     const newFavList = [...favourites, movie];
-    setFavourites(newFavList);
-    saveToLocalStorage(newFavList);
+    const currentMovieID = movie.imdbID;
+    if (newFavList.filter((fav) => fav.imdbID === currentMovieID).length < 2) {
+      setFavourites(newFavList);
+      saveToLocalStorage(newFavList);
+    }
   };
 
   const removeFavouriteMovie = (movie) => {
     const newFavList = favourites.filter((fav) => fav.imdbID !== movie.imdbID);
-
     setFavourites(newFavList);
     saveToLocalStorage(newFavList);
   };
